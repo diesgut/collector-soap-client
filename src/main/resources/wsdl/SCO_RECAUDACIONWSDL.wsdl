@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://scotia.ws.creo.com"
+xmlns:apachesoap="http://xml.apache.org/xml-soap"
+xmlns:impl="http://scotia.ws.creo.com" xmlns:intf="http://scotia.ws.creo.com"
+xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+<wsdl:types>
+<schema elementFormDefault="qualified"
+targetNamespace="http://scotia.ws.creo.com"
+xmlns="http://www.w3.org/2001/XMLSchema">
+<element name="ejecutarTransaccionScotiabank">
+<complexType>
+<sequence>
+<element name="Input" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+<element name="ejecutarTransaccionScotiabankResponse">
+<complexType>
+<sequence>
+<element name="ejecutarTransaccionScotiabankReturn" type="xsd:string"/>
+</sequence>
+</complexType>
+</element>
+</schema>
+</wsdl:types>
+
+<wsdl:message name="ejecutarTransaccionScotiabankResponse">
+<wsdl:part element="impl:ejecutarTransaccionScotiabankResponse"
+name="parameters"/>
+</wsdl:message>
+<wsdl:message name="ejecutarTransaccionScotiabankRequest">
+<wsdl:part element="impl:ejecutarTransaccionScotiabank" name="parameters"/>
+</wsdl:message>
+<wsdl:portType name="EjecTransaccionScotiabank">
+<wsdl:operation name="ejecutarTransaccionScotiabank">
+
+<wsdl:input message="impl:ejecutarTransaccionScotiabankRequest"
+name="ejecutarTransaccionScotiabankRequest"/>
+<wsdl:output message="impl:ejecutarTransaccionScotiabankResponse"
+name="ejecutarTransaccionScotiabankResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="EjecTransaccionScotiabankSoapBinding"
+type="impl:EjecTransaccionScotiabank">
+<wsdlsoap:binding style="document"
+transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="ejecutarTransaccionScotiabank">
+<wsdlsoap:operation soapAction=""/>
+<wsdl:input name="ejecutarTransaccionScotiabankRequest">
+<wsdlsoap:body use="literal"/>
+</wsdl:input>
+<wsdl:output name="ejecutarTransaccionScotiabankResponse">
+<wsdlsoap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="EjecTransaccionScotiabankService">
+<wsdl:port binding="impl:EjecTransaccionScotiabankSoapBinding"
+name="EjecTransaccionScotiabank">
+<wsdlsoap:address
+location=
+"http://localhost:8085/InterconexionScotia/services/EjecTransaccionScotiabank"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

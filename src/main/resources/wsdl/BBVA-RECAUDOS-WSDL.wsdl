@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://www.emp.com.pe/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.emp.com.pe/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.emp.com.pe/">
+      
+      <s:complexType name="cabecera">
+      	<s:sequence>
+      		<s:element minOccurs="1" maxOccurs="1" name="operacion" nillable="true" type="tns:operacion"/>
+      	</s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="operacion">
+      	<s:sequence>
+      		<s:element minOccurs="0" maxOccurs="1" name="codigoOperacion" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="numeroOperacion" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoBanco" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoConvenio" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="canalOperacion" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoOficina" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="fechaOperacion" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="horaOperacion" type="s:string"/>
+      	</s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="respuesta">
+      	<s:sequence>
+      		<s:element minOccurs="0" maxOccurs="1" name="codigo" type="s:string"/>
+            <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string"/>
+      	</s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="detalleConsulta">
+      	<s:sequence>
+      		<s:element minOccurs="1" maxOccurs="1" name="transaccion" nillable="true" type="tns:transaccionConsulta"/>
+      	</s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="transaccionConsulta">
+      	<s:sequence>
+      		<s:element minOccurs="0" maxOccurs="1" name="numeroReferenciaDeuda" type="s:string"/>
+      	</s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="recaudosConsultaRq">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cabecera" nillable="true" type="tns:cabecera"/>
+          <s:element minOccurs="1" maxOccurs="1" name="detalle" nillable="true" type="tns:detalleConsulta"/>
+        </s:sequence>
+      </s:complexType>
+            
+      <s:element name="ConsultarDeuda">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="recaudosRq" nillable="true" type="tns:recaudosConsultaRq"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+                  
+      <s:complexType name="recaudosConsultaRS">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cabecera" nillable="true" type="tns:cabecera"/>
+          <s:element minOccurs="1" maxOccurs="1" name="detalle" nillable="true" type="tns:detalleConsultaRs"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="detalleConsultaRs">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="respuesta" nillable="true" type="tns:respuesta"/>
+          <s:element minOccurs="1" maxOccurs="1" name="transaccion" nillable="true" type="tns:trasaccionConsultaRs"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:element name="ConsultarDeudaResponse">
+        <s:complexType>
+          <s:sequence>
+          	<s:element minOccurs="1" maxOccurs="1" name="recaudosRs" nillable="true" type="tns:recaudosConsultaRS"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      
+      <s:complexType name="trasaccionConsultaRs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroReferenciaDeuda" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="nombreCliente" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroOperacionEmpresa" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="indMasDeuda" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cantidadDocsDeuda" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="datosEmpresa" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="listaDocumentos" type="tns:ArrayOfDocumento"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDocumento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="documento" nillable="true" type="tns:documento"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="documento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="numero" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="fechaEmision" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="fechaVencimiento" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="importeDeuda" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="importeDeudaMinima" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="indicadorRestriccPago" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="cantidadSubconceptos" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="listaSubconceptos" type="tns:ArrayOfSubconcepto"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSubconcepto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="subconcepto" nillable="true" type="tns:subconcepto"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="subconcepto">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="codigo" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="importe" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      
+      
+      <s:complexType name="recaudosPagoRq">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cabecera" nillable="true" type="tns:cabecera"/>
+          <s:element minOccurs="0" maxOccurs="1" name="detalle" nillable="true" type="tns:detallePagoRq"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="detallePagoRq">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="transaccion" nillable="true" type="tns:transaccionPagoRq"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="transaccionPagoRq">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroReferenciaDeuda" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="importeDeudaPagada" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroOperacionRecaudos" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="formaPago" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codigoMoneda" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="datosEmpresa" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="otrosDatosEmpresa" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:element name="NotificarPago">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="recaudosRq" type="tns:recaudosPagoRq"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      
+      <s:complexType name="recaudosPagoRs">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cabecera" nillable="true" type="tns:cabecera"/>
+          <s:element minOccurs="1" maxOccurs="1" name="detalle" nillable="true" type="tns:detallePagoRs"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="detallePagoRs">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="respuesta" nillable="true" type="tns:respuesta"/>
+          <s:element minOccurs="1" maxOccurs="1" name="transaccion" nillable="true" type="tns:transaccionPagoRs"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="transaccionPagoRs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroReferenciaDeuda" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroOperacionEmpresa" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="datosEmpresa" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:element name="NotificarPagoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="recaudosRs" type="tns:recaudosPagoRs"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      
+      <s:complexType name="transaccionExtornoRq">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroReferenciaDeuda" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroDocumento" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="importeDeudaPagada" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroOperacionRecaudos" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroOperacionOriginal" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="fechaOperacionOriginal" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="formaPago" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="codigoMoneda" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="datosEmpresa" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="otrosDatosEmpresa" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="detalleExtornoRq">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="transaccion" nillable="true" type="tns:transaccionExtornoRq"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="recaudosExtornoRq">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cabecera" nillable="true" type="tns:cabecera"/>
+          <s:element minOccurs="1" maxOccurs="1" name="detalle" nillable="true" type="tns:detalleExtornoRq"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:element name="ExtornarPago">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="recaudosRq" type="tns:recaudosExtornoRq"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      
+      
+      <s:complexType name="transaccionExtornoRs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroReferenciaDeuda" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="numeroOperacionEmpresa" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="datosEmpresa" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+            
+      <s:complexType name="detalleExtornoRs">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="respuesta" nillable="true" type="tns:respuesta"/>
+          <s:element minOccurs="1" maxOccurs="1" name="detalle" nillable="true" type="tns:transaccionExtornoRs"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:complexType name="recaudosExtornoRs">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="cabecera" nillable="true" type="tns:cabecera"/>
+          <s:element minOccurs="1" maxOccurs="1" name="detalle" nillable="true" type="tns:detalleExtornoRs"/>
+        </s:sequence>
+      </s:complexType>
+      
+      <s:element name="ExtornarPagoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="recaudosRs" type="tns:recaudosExtornoRs"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultarDeudaSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultarDeuda"/>
+  </wsdl:message>
+  <wsdl:message name="ConsultarDeudaSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarDeudaResponse"/>
+  </wsdl:message>
+  <wsdl:message name="NotificarPagoSoapIn">
+    <wsdl:part name="parameters" element="tns:NotificarPago"/>
+  </wsdl:message>
+  <wsdl:message name="NotificarPagoSoapOut">
+    <wsdl:part name="parameters" element="tns:NotificarPagoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="ExtornarPagoSoapIn">
+    <wsdl:part name="parameters" element="tns:ExtornarPago"/>
+  </wsdl:message>
+  <wsdl:message name="ExtornarPagoSoapOut">
+    <wsdl:part name="parameters" element="tns:ExtornarPagoResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="INT_BBVA_PAESoap">
+    <wsdl:operation name="ConsultarDeuda">
+      <wsdl:input message="tns:ConsultarDeudaSoapIn"/>
+      <wsdl:output message="tns:ConsultarDeudaSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarPago">
+      <wsdl:input message="tns:NotificarPagoSoapIn"/>
+      <wsdl:output message="tns:NotificarPagoSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="ExtornarPago">
+      <wsdl:input message="tns:ExtornarPagoSoapIn"/>
+      <wsdl:output message="tns:ExtornarPagoSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="INT_BBVA_PAESoap" type="tns:INT_BBVA_PAESoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ConsultarDeuda">
+      <soap:operation soapAction="http://www.emp.com.pe/ConsultarDeuda" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NotificarPago">
+      <soap:operation soapAction="http://www.emp.com.pe/NotificarPago" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExtornarPago">
+      <soap:operation soapAction="http://www.emp.com.pe/ExtornarPago" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="INT_BBVA_PAE">
+    <wsdl:port name="INT_BBVA_PAESoap" binding="tns:INT_BBVA_PAESoap">
+      <soap:address location="http://localhost:80/bbva/servicios/recaudos"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -9,7 +9,7 @@
 		<version>2.2.7.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.diesgot</groupId>
+	<groupId>com.diesgut</groupId>
 	<artifactId>collector-soap-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>collector-soap-client</name>
@@ -79,6 +79,7 @@
 	    <version>3.10</version>
 	</dependency>
 
+
 		
 	</dependencies>
 
@@ -92,6 +93,30 @@
 
 
 
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.jvnet.jaxb2.maven2</groupId> -->
+<!-- 				<artifactId>maven-jaxb2-plugin</artifactId> -->
+<!-- 				<version>0.14.0</version> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<id>schema1-generate</id> -->
+<!-- 						<goals> -->
+<!-- 							<goal>generate</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
+<!-- 							<schemaLanguage>WSDL</schemaLanguage> -->
+<!-- 							<schemas> -->
+<!-- 								<schema> -->
+<!-- 									<url>http://localhost:8080/iBusinessIntegration/ScotiaRecaudacionSoap?wsdl</url> -->
+<!-- 								</schema> -->
+<!-- 							</schemas> -->
+<!-- 							<generatePackage>com.creo.ws.scotia</generatePackage> -->
+<!-- 							<generateDirectory>${project.basedir}/target/generated-sources/collector/</generateDirectory> -->
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
+
 			<plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
@@ -102,20 +127,19 @@
 						<goals>
 							<goal>generate</goal>
 						</goals>
-						<configuration>
-							<schemaLanguage>WSDL</schemaLanguage>
-							<schemas>
-								<schema>
-									<url>http://localhost:8080/xxx/xxx?wsdl</url>
-								</schema>
-							</schemas>
-							<!-- <generatePackage>com.creo.ws.scotia</generatePackage> -->
-							<generateDirectory>${project.basedir}/target/generated-sources/collector/</generateDirectory>
-						</configuration>
+					    <configuration>
+					          <schemaLanguage>WSDL</schemaLanguage>
+					          <schemaDirectory>${project.basedir}/src/main/resources/wsdl</schemaDirectory>
+<!-- 				           <generatePackage>com.creo.ws.scotia</generatePackage> -->
+					          <generateDirectory>${project.basedir}/target/generated-sources/collector/</generateDirectory>
+					          <schemaIncludes>
+					             <include>SCO_RECAUDACIONWSDL.wsdl</include>
+					              <include>BBVA-RECAUDOS-WSDL.wsdl</include>
+					          </schemaIncludes>
+					    </configuration>
 					</execution>
 				</executions>
 			</plugin>
-
 
 
 			<plugin>

@@ -1,4 +1,4 @@
-package com.diesgot.collectorsoapclient;
+package com.diesgut.collectorsoapclient;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
